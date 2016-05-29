@@ -6,6 +6,7 @@ import org.uqbar.xtrest.api.annotation.Get
 //import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
 import org.omg.CORBA.UserException
+import grupo10.gatoEncerrado_Dominio.Juego
 
 /**
  * 
