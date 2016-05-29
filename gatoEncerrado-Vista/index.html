@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html ng-app= "gato encerrado">
+<html data-ng-app= "gatoEncerradoApp">
 <head>
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="Style/Style.css">
-<script src="lib/angular.js"></script>
+<script src="Lib/angular.min.js"></script>
 
 <script src="Script/jquery-1.12.3.js"></script>
 <script src="Script/bootstrap.js"></script>
-<script src= "Script/revisarScrips.js"></script>
+<script src="Script/revisarScripts.js"></script>
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Gato Encerrado</title>
 <link rel="stylesheet" href="Style/bootstrap.css">
 </head>
-<body ng-controller="LaberintosController">
-
+<body data-ng-controller="LaberintosController">
 
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-8"><h1>Aca hay gato encerrado</h1></div>
-  <div class="col-md-4"><h4>Usuario: </h4></div>
+  <div class="col-md-4"><h4>Usuario: {{gatoEncerradoApp.usuario}} </h4></div>
 </div>
 </div>
 
@@ -40,7 +39,7 @@
     </div>
   </div>
 </div>
-<div class="row margin-top-40"></div>
+<hr>
 </div>
 
 <hr>
