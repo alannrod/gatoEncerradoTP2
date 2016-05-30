@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+body {
+	border: ridge black 2px;
+	padding-left: 2em;
+	font-family: Georgia, "Times New Roman",Times, serif;
+}
+
+header{
+	font-family:verdana;
+	font-size:290%;
+	border: ridge black 2px;
+}
+
+img{
+	width:104px;
+	height:104px;
+}
+
+table {
+	width:100%;
+	border: ridge black 2px;
+} 
+
+td {
+	border: ridge black 2px;
+}
+#user{
+	width:50px;
+	height:50px;
+}
+
+#sinBordeIzq{
+	border: white;
+}
+
+#sinBordeDer{
+	font-size:55%;
+	text-align:right;
+	border: white;
+}
+
+footer{
+	text-align:center;
+}
+
+a:link {
+  color: blue }
+a:visited {
+  color: purple }
+address {
+  margin-top: 1em;
+  padding-top: 1em;
+  border-top: thin dotted }

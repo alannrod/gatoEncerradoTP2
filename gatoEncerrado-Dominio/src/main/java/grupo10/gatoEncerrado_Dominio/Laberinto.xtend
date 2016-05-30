@@ -15,8 +15,10 @@ class Laberinto {
 	ArrayList<String> nombreHabitaciones
 	String habInicial
 	String habFinal
+	String path 
+	String url
 	
-	new(Integer idLaberinto, String nombreLaberinto, String descripcion, String nombreHabitacion1,String nombreHabitacion2, String accion1, String accion2, String item, String itemDos) {
+	new(Integer idLaberinto, String nombreLaberinto, String descripcion, String nombreHabitacion1,String nombreHabitacion2, String accion1, String accion2, String item, String itemDos, String path, String url) {
 		this.idHabitacion = 1
 		this.habitaciones = newArrayList()
 		this.items = newArrayList()
@@ -24,28 +26,30 @@ class Laberinto {
 		this.idLaberinto = idLaberinto
 		this.nombreLaberinto = nombreLaberinto
 		this.descripcion = descripcion
-		this.habitaciones.addHabitacion("nombreHabitacion1", accion1)
-		this.habitaciones.addHabitacion("nombreHabitacion2", accion2)
-		this.items.add("item")
-		this.items.add("itemDos")
+		this.addHabitacion(nombreHabitacion1, accion1)
+		this.addHabitacion(nombreHabitacion2, accion2)
+		this.items.add(item)
+		this.items.add(itemDos)
+		this.path = path
+		this.url = url
 		
 	}
 	
-	def addHabitacion(ArrayList<Habitacion> habitaciones, String unstring,String accion) {
-		val habitacionNueva = new Habitacion (idHabitacion, unstring,accion)
-		this.idHabitacion = this.idHabitacion +1
+	def addHabitacion(String unstring,String accion) {
+		
+		val Habitacion habitacionNueva = new Habitacion (idHabitacion, unstring,accion)
+		
 		if (this.idHabitacion == 1){
 			this.habInicial = habitacionNueva.getNombreHabitacion()
 		}
 		else this.habFinal = habitacionNueva.getNombreHabitacion()
+		this.idHabitacion = this.idHabitacion +1
+		this.habitaciones.add(habitacionNueva)
 	}
 	
+	
 	def buscarIdHab(Integer idHab) {
-		for(var i = 0 ;i <this.habitaciones.size() ; i++){
-            if(this.habitaciones.get(i).getIdHabitacion()== idHab){
-            	return this.habitaciones.get(i);
-            	}
-            }
+		return habitaciones.findFirst[it.idHabitacion == idHab]
      }
 
 }

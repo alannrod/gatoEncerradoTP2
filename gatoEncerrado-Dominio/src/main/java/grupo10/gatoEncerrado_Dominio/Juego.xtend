@@ -17,25 +17,27 @@ class Juego {
 	Laberinto laberintoActual
 	
 	
+	
 	new(){	
 		this.usuario = new Participante("Pablo24", 24)
+		this.usuario.agregarItemAlInventario("tijera escolar")
 		this.idLaberinto = 0
-		this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal","Habitacion del bien", "Ir a escalera","No hacer nada", "Lentes", "Pila AA")
-		this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos","Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista")
-		this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada","Habitacion plateada", "Saltar la pared","Sentarse", "Bomba", "Pizza")
-		this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7","Habitacion Tenes un 10", "Aprobar","Rezar", "Angular", "CSS")
+		this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal","Habitacion del bien", "Ir a escalera","No hacer nada", "Lentes", "Pila AA", "laberintos_1.jpg", "labfirst")
+		this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos","Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista", "laberintos_2.jpg", "labsecond")
+		this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada","Habitacion plateada", "Saltar la pared","Sentarse", "Bomba", "Pizza", "laberintos_3.png", "labthird")
+		this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7","Habitacion Tenes un 10", "Aprobar","Rezar", "Angular", "CSS", "laberintos_4.jpg","labfourth")
 	}
 	
 	def static Juego getInstance(){	
 		return instance
 	}	
 	
-	def void addLaberinto(String nombreLaberinto, String descripcion, String nombreHabitacion1, String nombreHabitacion2, String accion1, String accion2, String item, String itemDos){
-		this.usuario.addLab(new Laberinto(idLaberinto,nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos))
+	def void addLaberinto(String nombreLaberinto, String descripcion, String nombreHabitacion1, String nombreHabitacion2, String accion1, String accion2, String item, String itemDos, String path, String url){
+		this.usuario.addLab(new Laberinto(idLaberinto,nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos, path, url))
 		this.idLaberinto = this.idLaberinto+1
-	}
+	} 
 	
-	def static ArrayList<Laberinto> getLaberintosParaParticipante(Integer integer) {
+	def static ArrayList<Laberinto> getLaberintosParaParticipante(Integer integer ) {
 		if (integer == instance.usuario.getIdUsuario()){
 			return instance.usuario.laberintos} 
 		else
@@ -44,7 +46,7 @@ class Juego {
 	
 	def static Laberinto getLaberinto(Integer idUsuario, Integer idLaberinto) {
         instance.laberintos = getLaberintosParaParticipante(idUsuario)
-        instance.laberintoActual=instance.buscarId(idLaberinto)
+        instance.laberintoActual=instance.usuario.getLaberintos().get(1)
         return instance.laberintoActual
 	}
 	
@@ -59,7 +61,7 @@ class Juego {
 	def static realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
 		val Accion queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
 		queHace.realizarAccion(instance.usuario,instance.laberintoActual.buscarIdHab(idHabitacion))
-		return instance.laberintoActual
+		return instance.usuario.getInventario()
 	//deberia devolver un laberinto con las modificaciones pertinentes
 	}
 	

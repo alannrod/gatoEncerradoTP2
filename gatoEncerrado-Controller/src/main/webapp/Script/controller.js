@@ -9,14 +9,14 @@ gatoEncerradoApp.controller('LaberintosController', function LaberintosControlle
     {nombre:'Laberinto 4', imagenUrl: 'WebContent/laberintos_4.jpg', link: 'labfourth.html'}
   ];*/
     
-    $http.get( 'http://127.0.0.1:9000/usuario' )
+    $http.get( 'http://localhost:9000/usuario' )
     .then(function successCallback(response) {
     $scope.usuario= response.data; 
    }, function errorCallback(response) { 
    	console.error(response);
    });
    
-   $http.get( 'http://127.0.0.1:9000/usuario/24' )
+   $http.get( 'http://localhost:9000/usuario/24' )
     .then(function successCallback(response) {
     $scope.obtenerInventario= response.data; 
    }, function errorCallback(response) { 
@@ -24,7 +24,7 @@ gatoEncerradoApp.controller('LaberintosController', function LaberintosControlle
    });
    
    
-   $http.get( 'http://127.0.0.1:9000/laberintos/24' )
+   $http.get( 'http://localhost:9000/laberintos/24' )
     .then(function successCallback(response) {
     $scope.laberintos= response.data; 
    }, function errorCallback(response) { 

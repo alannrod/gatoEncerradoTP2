@@ -14,7 +14,7 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class Juego {
   private final static Juego instance = new Juego();
   
-  private Participante idUsuario;
+  private Participante usuario;
   
   private ArrayList<Laberinto> laberintos = new ArrayList<Laberinto>();
   
@@ -23,35 +23,43 @@ public class Juego {
   private Laberinto laberintoActual;
   
   public Juego() {
-    Participante _participante = new Participante("Pablo24");
-    this.idUsuario = _participante;
-    this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal", "Habitacion del bien", "Ir a escalera", "No hacer nada", "Lentes", "Pila AA");
-    this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos", "Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista");
-    this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada", "Habitacion plateada", "Saltar la pared", "Sentarse", "Bomba", "Pizza");
-    this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7", "Habitacion Tenes un 10", "Aprobar", "Rezar", "Angular", "CSS");
+    Participante _participante = new Participante("Pablo24", Integer.valueOf(24));
+    this.usuario = _participante;
+    this.usuario.agregarItemAlInventario("tijera escolar");
+    this.idLaberinto = Integer.valueOf(0);
+    this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal", "Habitacion del bien", "Ir a escalera", "No hacer nada", "Lentes", "Pila AA", "laberintos_1.jpg", "labfirst");
+    this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos", "Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista", "laberintos_2.jpg", "labsecond");
+    this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada", "Habitacion plateada", "Saltar la pared", "Sentarse", "Bomba", "Pizza", "laberintos_3.png", "labthird");
+    this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7", "Habitacion Tenes un 10", "Aprobar", "Rezar", "Angular", "CSS", "laberintos_4.jpg", "labfourth");
   }
   
   public static Juego getInstance() {
     return Juego.instance;
   }
   
-  public void addLaberinto(final String nombreLaberinto, final String descripcion, final String nombreHabitacion1, final String nombreHabitacion2, final String accion1, final String accion2, final String item, final String itemDos) {
-    Laberinto _laberinto = new Laberinto(this.idLaberinto, nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos);
-    this.laberintos.add(_laberinto);
+  public void addLaberinto(final String nombreLaberinto, final String descripcion, final String nombreHabitacion1, final String nombreHabitacion2, final String accion1, final String accion2, final String item, final String itemDos, final String path, final String url) {
+    Laberinto _laberinto = new Laberinto(this.idLaberinto, nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos, path, url);
+    this.usuario.addLab(_laberinto);
     this.idLaberinto = Integer.valueOf(((this.idLaberinto).intValue() + 1));
   }
   
   public static ArrayList<Laberinto> getLaberintosParaParticipante(final Integer integer) {
-    boolean _equals = Objects.equal(integer, "Pablo24");
+    Integer _idUsuario = Juego.instance.usuario.getIdUsuario();
+    boolean _equals = Objects.equal(integer, _idUsuario);
     if (_equals) {
-      return Juego.instance.laberintos;
+      return Juego.instance.usuario.getLaberintos();
+    } else {
+      throw new IllegalArgumentException("no se encontro participante");
     }
-    return null;
   }
   
   public static Laberinto getLaberinto(final Integer idUsuario, final Integer idLaberinto) {
-    Laberinto _buscarId = Juego.instance.buscarId(idLaberinto);
-    return Juego.instance.laberintoActual = _buscarId;
+    ArrayList<Laberinto> _laberintosParaParticipante = Juego.getLaberintosParaParticipante(idUsuario);
+    Juego.instance.laberintos = _laberintosParaParticipante;
+    ArrayList<Laberinto> _laberintos = Juego.instance.usuario.getLaberintos();
+    Laberinto _get = _laberintos.get(1);
+    Juego.instance.laberintoActual = _get;
+    return Juego.instance.laberintoActual;
   }
   
   public Laberinto buscarId(final Integer idLab) {
@@ -66,18 +74,20 @@ public class Juego {
     return null;
   }
   
-  public static Accion realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
+  public static ArrayList<String> realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
     Habitacion _buscarIdHab = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
-    return _buscarIdHab.buscarIdAccion(idAccion);
+    final Accion queHace = _buscarIdHab.buscarIdAccion(idAccion);
+    Habitacion _buscarIdHab_1 = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
+    queHace.realizarAccion(Juego.instance.usuario, _buscarIdHab_1);
+    return Juego.instance.usuario.getInventario();
   }
   
-  @Pure
-  public Participante getIdUsuario() {
-    return this.idUsuario;
+  public static Participante getUsuario() {
+    return Juego.instance.usuario;
   }
   
-  public void setIdUsuario(final Participante idUsuario) {
-    this.idUsuario = idUsuario;
+  public void setUsuario(final Participante usuario) {
+    this.usuario = usuario;
   }
   
   @Pure

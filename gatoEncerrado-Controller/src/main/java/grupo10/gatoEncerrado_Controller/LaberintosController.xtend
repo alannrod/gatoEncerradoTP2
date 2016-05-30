@@ -22,35 +22,33 @@ class LaberintosController {
     	ok(Juego.getUsuario().getNombre())
     }
     
+    @Get("/usuario/:participanteId")
+    def obtenerInventario(){
+    	ok(Juego.getUsuario().getInventario().toJson)
+    }
+    
     @Get("/laberintos/:participanteId")
     def laberintos() {
         response.contentType = "application/json"
         val idParticipante = Integer.valueOf(participanteId) 
         val laberintos = Juego.getLaberintosParaParticipante(idParticipante)
-        /*val laberintosMin[]
-         for each laberinto as laberinto { 
-         	lmin.nombre = laberinto.nombre
-         	lmin.descripcion = laberinto.descripcion
-         	laberintosMin.add(lmin)
-         }*/
-         
-        //ok(laberintosMin.toJson)
+        
         ok(laberintos.toJson)
     }
      
 
-    @Get('/laberinto/:laberintoId/:participanteId')
-    def iniciarLaberinto(String laberinto, String participante) {
+    @Get('/iniciarLaberinto/:laberintoIde/:participanteIde')
+    def iniciarLaberinto() {
         response.contentType = "application/json"
-        val idParticipante = Integer.valueOf(participanteId)
-        val idLaberinto = Integer.valueOf(laberintoId)
+        val idParticipante1 = Integer.valueOf(participanteIde)
+        val idLaberinto1 = Integer.valueOf(laberintoIde)
         
         try {
         	// Devuelve un laberinto o primer habitacion
-            ok(Juego.getLaberinto(idParticipante, idLaberinto).toJson)
+            ok(Juego.getLaberinto(idParticipante1, idLaberinto1).toJson)
         }
         catch (UserException e) {
-            notFound("No existe laberinto con el id " + idLaberinto + " para el participante con id " + idParticipante );
+            notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
         }
     }
 
@@ -68,6 +66,20 @@ class LaberintosController {
         }
         catch (UserException e) {
             return notFound("No se puede realizar accion '" + idAccion + "'");
+        }
+    }
+    @Get('/iniciarLaberinto/:laberintoIde/:participanteIde/:habitacionId')
+    def buscarAcciones() {
+        response.contentType = "application/json"
+        val idParticipante1 = Integer.valueOf(participanteIde)
+        val idLaberinto1 = Integer.valueOf(laberintoIde)
+        val lab = Juego.getLaberinto(idParticipante1, idLaberinto1)
+        try {
+        	// Devuelve un laberinto o primer habitacion
+            ok(Juego.getLaberinto(idParticipante1, idLaberinto1).toJson)
+        }
+        catch (UserException e) {
+            notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
         }
     }
 
