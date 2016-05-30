@@ -8,7 +8,8 @@
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
 <script src="Script/jquery-1.12.3.js"></script>
 <script src="Script/bootstrap.js"></script>
-<script src="Script/revisarScripts.js"></script>
+<script src="Script/gatoEncerradoController.js"></script>
+<script src="Script/service.js"></script>
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -16,7 +17,6 @@
 <link rel="stylesheet" href="Style/bootstrap.css">
 </head>
 <body ng-controller="LaberintosController">
-<p>{{usuario}}</p>
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-8"><h1>Aca hay gato encerrado</h1></div>
@@ -28,11 +28,11 @@
 <div class="container-fluid">
 <div class="row">
   <div class="col-md-4">
-    <a href="labfirst.html" class="btn btn-default btn-lg btn-block" role="button"><img src="WebContent/laberintos_1.jpg" class="img-responsive" alt="laberinto uno">Laberinto 1</a>
-	<a href="labsecond.html" class="btn btn-default btn-lg btn-block" role="button"><img src="WebContent/laberintos_2.jpg" class="img-responsive" alt="laberinto dos">Laberinto 2</a>
-	<a href="labthird.html" class="btn btn-default btn-lg btn-block" role="button"><img src="WebContent/laberintos_3.png" class="img-responsive" alt="laberinto tres">Laberinto 3</a>
-	<a href="labfourth.html" class="btn btn-default btn-lg btn-block" role="button"><img src="WebContent/laberintos_4.jpg" class="img-responsive" alt="laberinto cuatro">Laberinto 4</a>
-  </div>
+  	<div ng-repeat="laberinto in laberintos">
+
+    <a href="{{laberinto.url}}" class="btn btn-default btn-lg btn-block" role="button"><img src="WebContent/{{laberinto.imagen}}" class="img-responsive" alt="imagen Laberinto">{{laberinto.nombre}}</a>
+    </div>
+</div>
   <div class="col-md-8">
     <div class="center-block">
       <h1>Seleccione un laberinto</h1>
