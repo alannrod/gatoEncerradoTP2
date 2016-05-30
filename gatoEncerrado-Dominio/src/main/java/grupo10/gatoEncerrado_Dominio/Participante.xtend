@@ -9,11 +9,13 @@ class Participante {
 	
 	String idUsuario 
 	ArrayList <String> inventario
+	ArrayList <Laberinto> laberintos
 	
 	new (String usuario){ 
 		
 		this.idUsuario = usuario
 		this.inventario = new ArrayList<String>() 
+		this.laberintos = newArrayList()
 	}
 	
 	/*
@@ -38,5 +40,10 @@ class Participante {
 	def void usarItem(String item){
 		this.inventario.remove(item)		
 	}
+	
+	def addLab(Laberinto laber) {
+		this.laberintos.add(laber)
+	}
+	
 	
 }

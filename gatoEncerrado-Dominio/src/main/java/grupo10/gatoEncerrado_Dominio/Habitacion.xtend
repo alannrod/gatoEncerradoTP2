@@ -10,26 +10,42 @@ class Habitacion {
 	Integer idHabitacion
 	ArrayList<Accion> acciones
 	Integer idAccion
+	ArrayList<String> items
+	ArrayList<Habitacion> linderas
 		
 	new(Integer unInteger, String unNombre,String unaAccion) {
 		this.idHabitacion = unInteger
 		this.nombreHabitacion= unNombre
 		this.addAcciones(unaAccion)
 		this.idAccion = 1
+		this.items = newArrayList()
+		this.linderas = newArrayList()
 	}
 	
 	def addAcciones(String unString) {
-		val accionNueva = new Accion(idAccion,unString)
 		idAccion = idAccion +20
-		this.acciones.add(accionNueva)
-		}
-	
-	def buscarIdAccion(Integer idAcc) {
+	    switch unString {
+	    	case unString.startsWith("ir") : this.acciones.add (new AccionIr(idAccion,unString))
+	    	case unString.startsWith("agarrar") : this.acciones.add (new AccionAgarrar(idAccion,unString))
+	    	default : this.acciones.add (new AccionUsar(idAccion,unString))
+	    } 
+    }
+    
+	def Accion buscarIdAccion(Integer idAcc) {
 		for(var i = 0 ;i <this.acciones.size() ; i++){
             if(this.acciones.get(i).getIdAccion()== idAcc){
             	return this.acciones.get(i);
             }
         }
+	}
+	
+	def quitarItemDeLaHabitacion(String elItem) {
+		this.items.remove(elItem)
+	}
+	
+	def boolean puedeIrA(Habitacion esaHabitacion
+	) {
+		return this.linderas.contains(esaHabitacion)
 	}
 	
 }

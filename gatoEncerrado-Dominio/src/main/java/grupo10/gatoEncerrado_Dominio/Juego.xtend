@@ -30,17 +30,21 @@ class Juego {
 	}	
 	
 	def void addLaberinto(String nombreLaberinto, String descripcion, String nombreHabitacion1, String nombreHabitacion2, String accion1, String accion2, String item, String itemDos){
-		laberintos.add(new Laberinto(idLaberinto,nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos))
+		idUsuario.addLab(new Laberinto(idLaberinto,nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos))
 		idLaberinto = idLaberinto+1
 	}
 	
-	def static getLaberintosParaParticipante(Integer integer) {
+	def static ArrayList<Laberinto> getLaberintosParaParticipante(Integer integer) {
 		if (integer == "Pablo24"){
-		return instance.laberintos} 
+		return instance.idUsuario.laberintos} 
+		else
+		 throw new IllegalArgumentException("no se encontro participante")
 	}
 	
-	def static getLaberinto(Integer idUsuario, Integer idLaberinto) {
+	def static Laberinto getLaberinto(Integer idUsuario, Integer idLaberinto) {
+        instance.laberintos = getLaberintosParaParticipante(idUsuario)
         instance.laberintoActual=instance.buscarId(idLaberinto)
+        return instance.laberintoActual
 	}
 	
 	def Laberinto buscarId(Integer idLab){
@@ -52,6 +56,7 @@ class Juego {
 	}
 	
 	def static realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
-		instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
+		val Accion queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
+		queHace.realizarAccion(instance.idUsuario,instance.laberintoActual.buscarIdHab(idHabitacion))
 	}
 }
