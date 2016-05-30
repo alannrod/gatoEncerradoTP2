@@ -36,7 +36,7 @@ class Juego {
 	}
 	
 	def static ArrayList<Laberinto> getLaberintosParaParticipante(Integer integer) {
-		if (integer == 24){
+		if (integer == instance.usuario.getIdUsuario()){
 			return instance.usuario.laberintos} 
 		else
 		 	throw new IllegalArgumentException("no se encontro participante")
@@ -59,6 +59,8 @@ class Juego {
 	def static realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
 		val Accion queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
 		queHace.realizarAccion(instance.usuario,instance.laberintoActual.buscarIdHab(idHabitacion))
+		return instance.laberintoActual
+	//deberia devolver un laberinto con las modificaciones pertinentes
 	}
 	
 	def static getUsuario() {

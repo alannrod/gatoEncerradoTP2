@@ -18,7 +18,7 @@ class LaberintosController {
   
    
     @Get("/usuario")
-    def obtenerUsuarioEnSerion(){
+    def obtenerUsuarioEnSesion(){
     	ok(Juego.getUsuario().getNombre())
     }
     
