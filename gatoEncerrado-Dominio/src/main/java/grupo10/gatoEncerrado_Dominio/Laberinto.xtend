@@ -17,6 +17,10 @@ class Laberinto {
 	String habFinal
 	
 	new(Integer idLaberinto, String nombreLaberinto, String descripcion, String nombreHabitacion1,String nombreHabitacion2, String accion1, String accion2, String item, String itemDos) {
+		this.idHabitacion = 1
+		this.habitaciones = newArrayList()
+		this.items = newArrayList()
+		this.nombreHabitaciones = newArrayList()
 		this.idLaberinto = idLaberinto
 		this.nombreLaberinto = nombreLaberinto
 		this.descripcion = descripcion
@@ -24,16 +28,16 @@ class Laberinto {
 		this.habitaciones.addHabitacion("nombreHabitacion2", accion2)
 		this.items.add("item")
 		this.items.add("itemDos")
-		this.idHabitacion = 1
+		
 	}
 	
 	def addHabitacion(ArrayList<Habitacion> habitaciones, String unstring,String accion) {
 		val habitacionNueva = new Habitacion (idHabitacion, unstring,accion)
-		idHabitacion = idHabitacion +1
-		if (idHabitacion == 1){
-			habInicial = habitacionNueva.getNombreHabitacion()
+		this.idHabitacion = this.idHabitacion +1
+		if (this.idHabitacion == 1){
+			this.habInicial = habitacionNueva.getNombreHabitacion()
 		}
-		else habFinal = habitacionNueva.getNombreHabitacion()
+		else this.habFinal = habitacionNueva.getNombreHabitacion()
 	}
 	
 	def buscarIdHab(Integer idHab) {

@@ -7,14 +7,17 @@ import org.eclipse.xtend.lib.annotations.Accessors
 class Participante {
 	
 	
-	String idUsuario 
+	
+	Integer idUsuario 
+	String nombre
 	ArrayList <String> inventario
 	ArrayList <Laberinto> laberintos
 	
-	new (String usuario){ 
+	new (String nombre, Integer idUsuario){ 
 		
-		this.idUsuario = usuario
-		this.inventario = new ArrayList<String>() 
+		this.idUsuario = idUsuario
+		this.nombre = nombre
+		this.inventario = newArrayList()
 		this.laberintos = newArrayList()
 	}
 	
@@ -33,7 +36,7 @@ class Participante {
 	
 	def void agregarItemAlInventario(String item){
 		if (this.inventario.size < 15){
-			inventario.add(item)
+			this.inventario.add(item)
 		} // deberÃ­a tirar una excepciÃ³n si ya son 15
 	}
 	

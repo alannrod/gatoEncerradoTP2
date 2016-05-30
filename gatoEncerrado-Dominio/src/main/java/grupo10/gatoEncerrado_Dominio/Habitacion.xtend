@@ -16,14 +16,16 @@ class Habitacion {
 	new(Integer unInteger, String unNombre,String unaAccion) {
 		this.idHabitacion = unInteger
 		this.nombreHabitacion= unNombre
-		this.addAcciones(unaAccion)
 		this.idAccion = 1
+		this.acciones = newArrayList()
 		this.items = newArrayList()
 		this.linderas = newArrayList()
+		this.addAcciones(unaAccion)
+		
 	}
 	
 	def addAcciones(String unString) {
-		idAccion = idAccion +20
+		this.idAccion = this.idAccion +20
 	    switch unString {
 	    	case unString.startsWith("ir") : this.acciones.add (new AccionIr(idAccion,unString))
 	    	case unString.startsWith("agarrar") : this.acciones.add (new AccionAgarrar(idAccion,unString))

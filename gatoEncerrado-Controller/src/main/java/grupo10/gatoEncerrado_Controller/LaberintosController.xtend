@@ -15,12 +15,26 @@ import grupo10.gatoEncerrado_Dominio.Juego
 @Controller
 class LaberintosController {
     extension JSONUtils = new JSONUtils
+  
+   
+    @Get("/usuario")
+    def obtenerUsuarioEnSerion(){
+    	ok(Juego.getUsuario().getNombre())
+    }
     
     @Get("/laberintos/:participanteId")
     def laberintos() {
         response.contentType = "application/json"
         val idParticipante = Integer.valueOf(participanteId) 
         val laberintos = Juego.getLaberintosParaParticipante(idParticipante)
+        /*val laberintosMin[]
+         for each laberinto as laberinto { 
+         	lmin.nombre = laberinto.nombre
+         	lmin.descripcion = laberinto.descripcion
+         	laberintosMin.add(lmin)
+         }*/
+         
+        //ok(laberintosMin.toJson)
         ok(laberintos.toJson)
     }
      
