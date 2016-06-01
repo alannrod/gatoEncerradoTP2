@@ -69,5 +69,10 @@ class Juego {
 		return instance.usuario
 	}
 	
+	def buscarIdUser(Integer idUsuario) {
+		if (this.usuario.getIdUsuario()== idUsuario)
+		return this.usuario
+	}
+	
 	
 }

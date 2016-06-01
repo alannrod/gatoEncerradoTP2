@@ -86,6 +86,15 @@ public class Juego {
     return Juego.instance.usuario;
   }
   
+  public Participante buscarIdUser(final Integer idUsuario) {
+    Integer _idUsuario = this.usuario.getIdUsuario();
+    boolean _equals = Objects.equal(_idUsuario, idUsuario);
+    if (_equals) {
+      return this.usuario;
+    }
+    return null;
+  }
+  
   public void setUsuario(final Participante usuario) {
     this.usuario = usuario;
   }
