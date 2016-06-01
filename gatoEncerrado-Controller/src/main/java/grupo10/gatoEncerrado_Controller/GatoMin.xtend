@@ -42,12 +42,14 @@ class IniciarLaberinto{
 class HabitacionMin{
 	//estos datos nos serviran al iniciar juegp en un laberinto
 	String idHabitacion
-	ArrayList<Accion> acciones
+	ArrayList<String> acciones
 
 	
 	new(Integer identificador, ArrayList<Accion> actions) {
 		this.idHabitacion = identificador.toString()
-		this.acciones = actions
+		for (Accion each: actions){
+			this.acciones.add(each.getNombreAccion())
+		}
 	}
 	
 }
@@ -87,7 +89,7 @@ class GatoMin {
 		return resultado
 	}
 	
-	//las necesitaremos en nuestro script para no traer todo
+	//las necesitaremos en nuestros get del controller para no traer todo
 	
 	def IniciarLaberinto iniciarLaberinto(Juego juego, Integer idLaberinto, Integer idUsuario){
 		var lab = juego.buscarId(idLaberinto)
@@ -95,7 +97,7 @@ class GatoMin {
 		return new IniciarLaberinto(lab, usuario)
 	}
 	
-	def String realizarAccionDeLaHabitacion(Juego juego, Integer idHab, Integer idAccion,  Integer idUsuario){
+	def String realizarAccion(Juego juego, Integer idHab, Integer idAccion,  Integer idUsuario){
 		var habActual = juego.getLaberintoActual().buscarIdHab(idHab)
 		var accion = habActual.buscarIdAccion(idAccion)
 		var jugador = juego.buscarIdUser (idUsuario)
@@ -103,6 +105,10 @@ class GatoMin {
 		return accion.getNombreAccion()//el string devuelto puede servirnos para devolver un alerta
 	}
 	
-	
+	def ArrayList<String> obtenerAcciones (Juego juego, Integer idHab, Integer idUsuario){
+		var habActual = juego.getLaberintoActual().buscarIdHab(idHab)
+		var habMin = new HabitacionMin(idHab, habActual.getAcciones())
+		return habMin.getAcciones()
+	}
 	
 }

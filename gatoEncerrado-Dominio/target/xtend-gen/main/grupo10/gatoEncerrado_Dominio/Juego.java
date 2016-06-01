@@ -74,16 +74,11 @@ public class Juego {
     return null;
   }
   
-  public static ArrayList<String> realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
+  public void realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
     Habitacion _buscarIdHab = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
     final Accion queHace = _buscarIdHab.buscarIdAccion(idAccion);
     Habitacion _buscarIdHab_1 = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
     queHace.realizarAccion(Juego.instance.usuario, _buscarIdHab_1);
-    return Juego.instance.usuario.getInventario();
-  }
-  
-  public static Participante getUsuario() {
-    return Juego.instance.usuario;
   }
   
   public Participante buscarIdUser(final Integer idUsuario) {
@@ -93,6 +88,11 @@ public class Juego {
       return this.usuario;
     }
     return null;
+  }
+  
+  @Pure
+  public Participante getUsuario() {
+    return this.usuario;
   }
   
   public void setUsuario(final Participante usuario) {

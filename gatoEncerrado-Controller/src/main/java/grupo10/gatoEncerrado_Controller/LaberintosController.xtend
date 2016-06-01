@@ -16,24 +16,30 @@ import grupo10.gatoEncerrado_Dominio.Juego
 class LaberintosController {
     extension JSONUtils = new JSONUtils
   
-   
+   //---ver---
     @Get("/usuario")
     def obtenerUsuarioEnSesion(){
-    	ok(Juego.getUsuario().getNombre())
+    	val juego = new Juego()// o creamos la instancia de juego o hacemos static al getNombre
+    	ok(juego.getUsuario().getNombre())
     }
     
     @Get("/usuario/:participanteId")
     def obtenerInventario(){
-    	ok(Juego.getUsuario().getInventario().toJson)
+    	val juego = new Juego ()//idem comentario anterior
+    	ok(juego.getUsuario().getInventario().toJson)
     }
+    //--- fin de zona de ver ---
+    
     
     @Get("/laberintos/:participanteId")
     def laberintos() {
         response.contentType = "application/json"
         val idParticipante = Integer.valueOf(participanteId) 
         val laberintos = Juego.getLaberintosParaParticipante(idParticipante)
-        
-        ok(laberintos.toJson)
+        //en laberintos obtengo los laberintos completos, los minimizare
+        val minimo = new GatoMin (laberintos)
+        val labMin = minimo.minimizarLaberintos()
+        ok(labMin.toJson)
     }
      
 
@@ -42,10 +48,14 @@ class LaberintosController {
         response.contentType = "application/json"
         val idParticipante1 = Integer.valueOf(participanteIde)
         val idLaberinto1 = Integer.valueOf(laberintoIde)
-        
+        val laberinto = Juego.getLaberinto(idParticipante1, idLaberinto1)
+        //obtengo un laberinto entero, lo achicaremos
+        val minimo = new GatoMin (laberinto)
+        val juego = new Juego()// necesitamos una instancia de juego...
+        val labMin = minimo.iniciarLaberinto(juego, idParticipante1, idLaberinto1)
         try {
         	// Devuelve un laberinto o primer habitacion
-            ok(Juego.getLaberinto(idParticipante1, idLaberinto1).toJson)
+            ok(labMin.toJson)
         }
         catch (UserException e) {
             notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
@@ -54,13 +64,20 @@ class LaberintosController {
 
     @Get('/realizar-accion/:idHabitacion/:idAccion/:idParticipante')
     def getRealizarAccion() {
+    	/*
+    	 * realizar accion intermanente ejecutara la accion para el participante
+    	 * y para la habitacion, pero nos devolvera un string con el nombre de la
+    	 * accion que se llevo a cabo
+    	 */
             response.contentType = "application/json"
             val habitacionId = Integer.valueOf(idHabitacion)
             val accionId = Integer.valueOf(idAccion)
             val participanteId = Integer.valueOf(idParticipante)
-            
+            val juego = new Juego()// necesitaremos una instancia de juego
+            val minificador = new GatoMin()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
+            juego.realizarAccion(accionId,habitacionId, participanteId)// hace internamente la accion,  no retorna nada
         try {
-            val resultadoRealizarAccion = Juego.realizarAccion(accionId, habitacionId, participanteId)
+            val resultadoRealizarAccion = minificador.realizarAccion(juego, habitacionId,accionId, participanteId)
             // Devolver lo que resulta como json
             ok(resultadoRealizarAccion .toJson);
         }
@@ -68,18 +85,22 @@ class LaberintosController {
             return notFound("No se puede realizar accion '" + idAccion + "'");
         }
     }
-    @Get('/iniciarLaberinto/:laberintoIde/:participanteIde/:habitacionId')
+    
+    
+    @Get('/obtenerAcciones/:participanteId/:habitacionId')
     def buscarAcciones() {
         response.contentType = "application/json"
-        val idParticipante1 = Integer.valueOf(participanteIde)
-        val idLaberinto1 = Integer.valueOf(laberintoIde)
-        val lab = Juego.getLaberinto(idParticipante1, idLaberinto1)
+        val idParticipante1 = Integer.valueOf(participanteId)
+        val idHabitacion1 = Integer.valueOf(habitacionId)
+        val juego = new Juego()
+        val mini = new GatoMin()
+        val accionesMinimas = mini.obtenerAcciones(juego,idHabitacion1, idParticipante1)
         try {
-        	// Devuelve un laberinto o primer habitacion
-            ok(Juego.getLaberinto(idParticipante1, idLaberinto1).toJson)
+        	// Devuelve un listado de strings que representan las acciones
+            ok(accionesMinimas.toJson)
         }
         catch (UserException e) {
-            notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
+            notFound("No existe la habitacion con el id " + idHabitacion1 + " para el participante con id " + idParticipante1);
         }
     }
 

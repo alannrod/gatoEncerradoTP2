@@ -58,15 +58,9 @@ class Juego {
 		}
 	}
 	
-	def static realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
+	def realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
 		val Accion queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
 		queHace.realizarAccion(instance.usuario,instance.laberintoActual.buscarIdHab(idHabitacion))
-		return instance.usuario.getInventario()
-	//deberia devolver un laberinto con las modificaciones pertinentes
-	}
-	
-	def static getUsuario() {
-		return instance.usuario
 	}
 	
 	def buscarIdUser(Integer idUsuario) {
