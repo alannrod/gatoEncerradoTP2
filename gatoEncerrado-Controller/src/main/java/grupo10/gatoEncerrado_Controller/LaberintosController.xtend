@@ -94,7 +94,7 @@ class LaberintosController {
         val idHabitacion1 = Integer.valueOf(habitacionId)
         val juego = new Juego()
         val mini = new GatoMin()
-        val accionesMinimas = mini.obtenerAcciones(juego,idHabitacion1, idParticipante1)
+        val accionesMinimas = mini.obtenerAcciones(juego,idParticipante1, idHabitacion1)
         try {
         	// Devuelve un listado de strings que representan las acciones
             ok(accionesMinimas.toJson)

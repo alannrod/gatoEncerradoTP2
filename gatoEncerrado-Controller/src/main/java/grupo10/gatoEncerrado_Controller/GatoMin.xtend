@@ -105,7 +105,7 @@ class GatoMin {
 		return accion.getNombreAccion()//el string devuelto puede servirnos para devolver un alerta
 	}
 	
-	def ArrayList<String> obtenerAcciones (Juego juego, Integer idHab, Integer idUsuario){
+	def ArrayList<String> obtenerAcciones (Juego juego, Integer idUsuario, Integer idHab){
 		var habActual = juego.getLaberintoActual().buscarIdHab(idHab)
 		var habMin = new HabitacionMin(idHab, habActual.getAcciones())
 		return habMin.getAcciones()
