@@ -16,9 +16,8 @@ class Laberinto {
 	String habInicial
 	String habFinal
 	String path 
-	String url
 	
-	new(Integer idLaberinto, String nombreLaberinto, String descripcion, String nombreHabitacion1,String nombreHabitacion2, String accion1, String accion2, String item, String itemDos, String path, String url) {
+	new(Integer idLaberinto, String nombreLaberinto, String descripcion, String nombreHabitacion1,String nombreHabitacion2, String accion1, String accion2, String item, String itemDos, String path) {
 		this.idHabitacion = 1
 		this.habitaciones = newArrayList()
 		this.items = newArrayList()
@@ -31,7 +30,7 @@ class Laberinto {
 		this.items.add(item)
 		this.items.add(itemDos)
 		this.path = path
-		this.url = url
+		
 		
 	}
 	

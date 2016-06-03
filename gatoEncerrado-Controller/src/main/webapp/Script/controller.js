@@ -31,21 +31,39 @@ gatoEncerradoApp.controller('LaberintosController', function LaberintosControlle
    	console.error(response);
    });
    
-   $http.get( 'http://127.0.0.1:9000/iniciarLaberinto/0/24' )
+   $http.get( 'http://localhost:9000/iniciarLaberinto/0/24' )
     .then(function successCallback(response) {
     $scope.iniciarLaberinto= response.data; 
    }, function errorCallback(response) { 
    	console.error(response);
    });
    
-   $http.get( 'http://127.0.0.1:9000/realizar-accion/0/21/24' )
+   $http.get( 'http://localhost:9000/realizar-accion/0/21/24' )
     .then(function successCallback(response) {
     $scope.getRealizarAccion= response.data; 
    }, function errorCallback(response) { 
    	console.error(response);
    });
 
-
+   
+   //para cambiar los templates //
+  gatoEncerradoApp.config(function($routeProvider){
+	  $routeProvider //lo usaremos para poder cambiar las direcciones
+	  .when ('/',{
+		  templateUrl:'Templates/home.html',
+		  controller: 'mainController'
+	  })
+	  
+	  .when('/lab',{
+		  templateUrl:'Templates/labfirst.html',
+		  controller: 'labController'// cambia el controller?
+	  })
+	  
+	  .when('/play',{
+		  templateUrl:'Templates/playlabfirst.html',
+		  controller: 'playController'// idem accion anterior ¿?
+	  })
+  })
 /*
   $http.get(
     'http://127.0.0.1:9000/laberintos/1298382', //1298382 = participanteId

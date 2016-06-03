@@ -27,18 +27,18 @@ public class Juego {
     this.usuario = _participante;
     this.usuario.agregarItemAlInventario("tijera escolar");
     this.idLaberinto = Integer.valueOf(0);
-    this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal", "Habitacion del bien", "Ir a escalera", "No hacer nada", "Lentes", "Pila AA", "laberintos_1.jpg", "labfirst");
-    this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos", "Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista", "laberintos_2.jpg", "labsecond");
-    this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada", "Habitacion plateada", "Saltar la pared", "Sentarse", "Bomba", "Pizza", "laberintos_3.png", "labthird");
-    this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7", "Habitacion Tenes un 10", "Aprobar", "Rezar", "Angular", "CSS", "laberintos_4.jpg", "labfourth");
+    this.addLaberinto("Laberinto 1", "MacGyverInt", "Habitacion del Mal", "Habitacion del bien", "Ir a escalera", "No hacer nada", "Lentes", "Pila AA", "laberintos_1.jpg");
+    this.addLaberinto("Laberinto 2", "Date un respiro", "Habitacion para novatos", "Habitacion para genios", "Caminar a la derecha", "Correr", "Escalera", "Largavista", "laberintos_2.jpg");
+    this.addLaberinto("Laberinto 3", "El tiempo es oro", "Habitacion dorada", "Habitacion plateada", "Saltar la pared", "Sentarse", "Bomba", "Pizza", "laberintos_3.png");
+    this.addLaberinto("Laberinto 4", "Aprobando la materia", "Habitacion Tenes un 7", "Habitacion Tenes un 10", "Aprobar", "Rezar", "Angular", "CSS", "laberintos_4.jpg");
   }
   
   public static Juego getInstance() {
     return Juego.instance;
   }
   
-  public void addLaberinto(final String nombreLaberinto, final String descripcion, final String nombreHabitacion1, final String nombreHabitacion2, final String accion1, final String accion2, final String item, final String itemDos, final String path, final String url) {
-    Laberinto _laberinto = new Laberinto(this.idLaberinto, nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos, path, url);
+  public void addLaberinto(final String nombreLaberinto, final String descripcion, final String nombreHabitacion1, final String nombreHabitacion2, final String accion1, final String accion2, final String item, final String itemDos, final String path) {
+    Laberinto _laberinto = new Laberinto(this.idLaberinto, nombreLaberinto, descripcion, nombreHabitacion1, nombreHabitacion2, accion1, accion2, item, itemDos, path);
     this.usuario.addLab(_laberinto);
     this.idLaberinto = Integer.valueOf(((this.idLaberinto).intValue() + 1));
   }
