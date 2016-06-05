@@ -13,11 +13,11 @@ class LaberintoMin{
 	String idLaberinto
 	String nombreLaberinto
 	String path
-	String imagen
 	
-	new(Integer identificador, String nombre) {
+	new(Integer identificador, String nombre, String path) {
 		this.idLaberinto = identificador.toString //conviene tenerlo en string para mostralo en la web
 		this.nombreLaberinto = nombre
+		this.path = path
 	}
 	
 }
@@ -31,7 +31,7 @@ class IniciarLaberinto{
 	
 	new(Laberinto laberinto, Participante participante) {
 		var GatoMin chiquitolina = new GatoMin(laberinto)//GatoMin sabe achicar las clases
-		this.idLaberinto = laberinto.getIdLaberinto().toString//lo mostramos como texto
+		this.idLaberinto = laberinto.getIdLaberinto().toString()//lo mostramos como texto
 		this.habitaciones= chiquitolina.minimizarHabitaciones()
 		this.inventario = participante.getInventario()
 	}
@@ -75,7 +75,7 @@ class GatoMin {
 	def ArrayList<LaberintoMin> minimizarLaberintos(){
 		var ArrayList<LaberintoMin> resultado = new ArrayList<LaberintoMin>()
 		for (Laberinto each: laberintos){
-			resultado.add(new LaberintoMin(each.getIdLaberinto(), each.getNombreLaberinto()))
+			resultado.add(new LaberintoMin(each.getIdLaberinto(), each.getNombreLaberinto(),each.getPath()))
 		}
 		return resultado		
 	}

@@ -59,8 +59,9 @@ class Juego {
 	}
 	
 	def realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
-		val Accion queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
+		val queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
 		queHace.realizarAccion(instance.usuario,instance.laberintoActual.buscarIdHab(idHabitacion))
+		return instance
 	}
 	
 	def buscarIdUser(Integer idUsuario) {

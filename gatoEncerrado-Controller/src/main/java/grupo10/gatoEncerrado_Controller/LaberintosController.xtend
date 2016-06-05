@@ -52,7 +52,7 @@ class LaberintosController {
         //obtengo un laberinto entero, lo achicaremos
         val minimo = new GatoMin (laberinto)
         val juego = new Juego()// necesitamos una instancia de juego...
-        val labMin = minimo.iniciarLaberinto(juego, idParticipante1, idLaberinto1)
+        val labMin = minimo.iniciarLaberinto(juego, idLaberinto1, idParticipante1)
         try {
         	// Devuelve un laberinto o primer habitacion
             ok(labMin.toJson)
@@ -75,9 +75,9 @@ class LaberintosController {
             val participanteId = Integer.valueOf(idParticipante)
             val juego = new Juego()// necesitaremos una instancia de juego
             val minificador = new GatoMin()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
-            juego.realizarAccion(accionId,habitacionId, participanteId)// hace internamente la accion,  no retorna nada
+            val juegoAfter = juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
         try {
-            val resultadoRealizarAccion = minificador.realizarAccion(juego, habitacionId,accionId, participanteId)
+            val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
             // Devolver lo que resulta como json
             ok(resultadoRealizarAccion .toJson);
         }
