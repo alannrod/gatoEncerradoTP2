@@ -15,7 +15,7 @@ gatoEncerradoApp.factory('Habs', function($resource) {
 
 gatoEncerradoApp.factory('Accs', function($resource) {
     return $('/realizar-accion/:idHabitacion/:idAccion/:idParticipante', {'idHabitacion': '@idHabitacion'}, {'idAccion': '@idAccion'} , {'idParticipante': '@idParticipante'} , {
-    	'todosLasHabitaciones': { method: 'GET', isArray: false}
+    	'habitacionesModificadas': { method: 'GET', isArray: true}
     });
 });
 
@@ -38,7 +38,13 @@ $scope.idUsuario = "24";
 	}, function errorCallback(data) { 
    	console.error(data);
    });
-
+	
+	$http.get("http://127.0.0.1:9000/inventario").success(function(data) {
+	$scope.inventario = data;
+	}, function errorCallback(data) { 
+   	console.error(data);
+   });
+	
 	$scope.iniciarLaberinto = function(idUsuario, idLaberinto) {
 		$http.get("iniciarLaberinto/"+ $scope.idUsuario +"/" + $scope.idLaberinto).success(function(data) {
 			$scope.habitaciones = data.habitaciones;
@@ -60,5 +66,14 @@ $scope.idUsuario = "24";
 			console.log(data);
 		}).error(errorHandler);
 		}
+		
+		this.abrirLaberinto= function(laberinto) {
+		$scope.laberintoActual = laberinto;
+		$("#abrirLab").modal({});
+
+		console.log($scope.laberintoSeleccionado);
+	};
+	
+	
 	});
 		

@@ -61,12 +61,12 @@ class LaberintosController {
         
      	val juego = new Juego
         val laberinto = juego.getLaberinto(idParticipante, idLaberinto)
-        val participante = juego.buscarIdUser(idParticipante)
+        //val participante = juego.buscarIdUser(idParticipante) LABERINTO ESTA EN NULL 
         //obtengo un laberinto entero, lo achicaremos
-       val minimo = new GatoMinimizado (laberinto)
+       //val minimo = new GatoMinimizado (laberinto)
        
-       val labMin = new IniciarLaberinto(laberinto, participante)
-       val habsLabMin = labMin.getHabitaciones()
+      // val labMin = new IniciarLaberinto(laberinto, participante)
+       //val habsLabMin = labMin.getHabitaciones()
   
         try {
         	// devuelve las habitaciones del laberinto
@@ -124,6 +124,12 @@ class LaberintosController {
             notFound("No existe la habitacion con el id " + idHabitacion1 + " para el participante con id " + idParticipante1);
         }
     }
+    
+    @Get('/inventario')
+	def obtenerInventario(){
+    	val juego = new Juego ()//idem comentario anterior
+    	ok(juego.getUsuario().getInventario().toJson)}
+ 
 
     def static void main(String[] args) {
         XTRest.start(LaberintosController, 9000)
