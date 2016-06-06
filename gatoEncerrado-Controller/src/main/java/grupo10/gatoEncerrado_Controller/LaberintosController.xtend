@@ -66,9 +66,10 @@ class LaberintosController {
        // val minimo = new GatoMinimizado (laberinto)
        
        val labMin = new IniciarLaberinto(laberinto, participante)
+       //val habsLabMin = labMin.getHabitaciones()
   
         try {
-        	// Devuelve un laberinto o primer habitacion
+        	// devuelve las habitaciones del laberinto
             ok(labMin.toJson)
         }
         catch (UserException e) {
@@ -94,10 +95,11 @@ class LaberintosController {
         
             //val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
             val juegoAfter = Juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
+            val labActual = juegoAfter.getLaberintoActual()
         try {
             //val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
             // Devolver lo que resulta como json
-            ok(juegoAfter.toJson);
+            ok(labActual.toJson);
         }
         catch (UserException e) {
             return notFound("No se puede realizar accion '" + idAccion + "'");
