@@ -74,11 +74,12 @@ public class Juego {
     return null;
   }
   
-  public void realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
+  public Juego realizarAccion(final Integer idHabitacion, final Integer idAccion, final Integer idUsuario) {
     Habitacion _buscarIdHab = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
     final Accion queHace = _buscarIdHab.buscarIdAccion(idAccion);
     Habitacion _buscarIdHab_1 = Juego.instance.laberintoActual.buscarIdHab(idHabitacion);
     queHace.realizarAccion(Juego.instance.usuario, _buscarIdHab_1);
+    return Juego.instance;
   }
   
   public Participante buscarIdUser(final Integer idUsuario) {

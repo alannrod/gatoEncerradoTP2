@@ -1,4 +1,4 @@
-package grupo10.gatoEncerrado_Controller
+package grupo10.gatoEncerrado_Dominio
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
@@ -30,7 +30,7 @@ class IniciarLaberinto{
 	ArrayList<String> inventario
 	
 	new(Laberinto laberinto, Participante participante) {
-		var GatoMin chiquitolina = new GatoMin(laberinto)//GatoMin sabe achicar las clases
+		var GatoMinimizado chiquitolina = new GatoMinimizado(laberinto)//GatoMin sabe achicar las clases
 		this.idLaberinto = laberinto.getIdLaberinto().toString()//lo mostramos como texto
 		this.habitaciones= chiquitolina.minimizarHabitaciones()
 		this.inventario = participante.getInventario()
@@ -57,7 +57,7 @@ class HabitacionMin{
 
 
 @Accessors
-class GatoMin {
+class GatoMinimizado {
 	//Aqui "achicaremos" nuestras clases del dominio de acuerdo a los datos que necesitemos
 	var ArrayList<Laberinto> laberintos
 	var Laberinto laberinto

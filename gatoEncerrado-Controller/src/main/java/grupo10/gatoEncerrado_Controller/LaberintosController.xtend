@@ -7,6 +7,7 @@ import org.uqbar.xtrest.api.annotation.Get
 import org.uqbar.xtrest.json.JSONUtils
 import org.omg.CORBA.UserException
 import grupo10.gatoEncerrado_Dominio.Juego
+import grupo10.gatoEncerrado_Dominio.GatoMinimizado
 
 /**
  * 
@@ -19,12 +20,16 @@ class LaberintosController {
    //---ver---
     @Get("/usuario")
     def obtenerUsuarioEnSesion(){
+    	
+    	response.contentType = "application/json"
     	val juego = new Juego()// o creamos la instancia de juego o hacemos static al getNombre
-    	ok(juego.getUsuario().getNombre())
+    	val usuario = juego.getUsuario() // tenemos un solo usuario 
+    	ok(usuario.toJson) // verificar si necesitamos nombre o todo el usuario
     }
     
     @Get("/usuario/:participanteId")
     def obtenerInventario(){
+    	
     	val juego = new Juego ()//idem comentario anterior
     	ok(juego.getUsuario().getInventario().toJson)
     }
@@ -32,12 +37,14 @@ class LaberintosController {
     
     
     @Get("/laberintos/:participanteId")
-    def laberintos() {
+    def mostrarLaberintosDeUsuario() {
+    	
         response.contentType = "application/json"
+        
         val idParticipante = Integer.valueOf(participanteId) 
         val laberintos = Juego.getLaberintosParaParticipante(idParticipante)
         //en laberintos obtengo los laberintos completos, los minimizare
-        val minimo = new GatoMin (laberintos)
+        val minimo = new GatoMinimizado (laberintos)
         val labMin = minimo.minimizarLaberintos()
         ok(labMin.toJson)
     }
@@ -45,12 +52,13 @@ class LaberintosController {
 
     @Get('/iniciarLaberinto/:laberintoIde/:participanteIde')
     def iniciarLaberinto() {
+    	
         response.contentType = "application/json"
         val idParticipante1 = Integer.valueOf(participanteIde)
         val idLaberinto1 = Integer.valueOf(laberintoIde)
         val laberinto = Juego.getLaberinto(idParticipante1, idLaberinto1)
         //obtengo un laberinto entero, lo achicaremos
-        val minimo = new GatoMin (laberinto)
+        val minimo = new GatoMinimizado (laberinto)
         val juego = new Juego()// necesitamos una instancia de juego...
         val labMin = minimo.iniciarLaberinto(juego, idLaberinto1, idParticipante1)
         try {
@@ -58,12 +66,14 @@ class LaberintosController {
             ok(labMin.toJson)
         }
         catch (UserException e) {
+        	
             notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
         }
     }
 
     @Get('/realizar-accion/:idHabitacion/:idAccion/:idParticipante')
     def getRealizarAccion() {
+    	
     	/*
     	 * realizar accion intermanente ejecutara la accion para el participante
     	 * y para la habitacion, pero nos devolvera un string con el nombre de la
@@ -74,7 +84,7 @@ class LaberintosController {
             val accionId = Integer.valueOf(idAccion)
             val participanteId = Integer.valueOf(idParticipante)
             val juego = new Juego()// necesitaremos una instancia de juego
-            val minificador = new GatoMin()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
+            val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
             val juegoAfter = juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
         try {
             val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
@@ -89,11 +99,12 @@ class LaberintosController {
     
     @Get('/obtenerAcciones/:participanteId/:habitacionId')
     def buscarAcciones() {
+    	
         response.contentType = "application/json"
         val idParticipante1 = Integer.valueOf(participanteId)
         val idHabitacion1 = Integer.valueOf(habitacionId)
         val juego = new Juego()
-        val mini = new GatoMin()
+        val mini = new GatoMinimizado()
         val accionesMinimas = mini.obtenerAcciones(juego,idParticipante1, idHabitacion1)
         try {
         	// Devuelve un listado de strings que representan las acciones
