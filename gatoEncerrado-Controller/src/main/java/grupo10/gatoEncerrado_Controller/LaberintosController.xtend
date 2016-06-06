@@ -92,10 +92,10 @@ class LaberintosController {
             val accionId = Integer.valueOf(idAccion)
             val participanteId = Integer.valueOf(idParticipante)
       
-        	
+        	val juego = new Juego
             //val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
-            val juegoAfter = Juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
-            val labActual = juegoAfter.getLaberintoActual()
+            //val juegoAfter = juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
+            val labActual = juego.getLaberintoActual()
         try {
             //val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
             // Devolver lo que resulta como json

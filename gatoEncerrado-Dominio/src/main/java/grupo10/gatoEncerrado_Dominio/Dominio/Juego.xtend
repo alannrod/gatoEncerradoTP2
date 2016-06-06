@@ -54,7 +54,8 @@ class Juego {
 		return laberintos.findFirst[it.idLaberinto  == idLab]
 	}
 	
-	def static Juego realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
+	def Juego realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
+		val lab = instance.getLaberinto(24,0)
 		val hab = instance.laberintoActual.buscarIdHab(idHabitacion)
 		val accion = hab.buscarIdAccion(idAccion)
 		
