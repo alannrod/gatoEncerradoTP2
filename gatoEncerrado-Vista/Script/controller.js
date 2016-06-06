@@ -1,19 +1,19 @@
-var app = angular.module("gatoEncerradoApp",['ngResource']);
+var gatoEncerradoApp = angular.module("gatoEncerradoApp",['ngResource']);
 
-app.factory('Labs', function($resource) {
+gatoEncerradoApp.factory('Labs', function($resource) {
     return $('laberintos/:participanteId', {'participanteId': '@participanteId'}, {
     	'mostrarLaberintosDeUsuario': { method: 'GET', isArray: true}
     });
 });
 
-app.factory('Habs', function($resource) {
+gatoEncerradoApp.factory('Habs', function($resource) {
     return $('/iniciarLaberinto/:idUser:idLab', {'idUser': '@idUser'}, {'idLab': '@idLab'} , {
     	'habitacionesDelNuevoLab': { method: 'GET', isArray: true}
     });
 });  
 
 
-app.factory('Accs', function($resource) {
+gatoEncerradoApp.factory('Accs', function($resource) {
     return $('/realizar-accion/:idHabitacion/:idAccion/:idParticipante', {'idHabitacion': '@idHabitacion'}, {'idAccion': '@idAccion'} , {'idParticipante': '@idParticipante'} , {
     	'todosLasHabitaciones': { method: 'GET', isArray: false}
     });
@@ -24,18 +24,20 @@ app.factory('Accs', function($resource) {
 gatoEncerradoApp.controller('gatoEncerradoControlador', function($scope,$http, Labs, Habs, Accs){
 
 $scope.idUsuario = "24";
+
 	
-	 $http.get("usuario" )
-    .then(function successCallback(response) {
-    $scope.usuario= response.data; 
-   }, function errorCallback(response) { 
-   	console.error(response);
+	$http.get("http://127.0.0.1:9000/usuario" ).success(function(data){
+	 
+    $scope.usuario= data; 
+    }, function errorCallback(data) { 
+   	console.error(data);
    });
 	
-	$http.get("laberintos/"+ $scope.idUsuario).success(function(data) {
+	$http.get("http://127.0.0.1:9000/laberintos/"+ $scope.idUsuario).success(function(data) {
 	$scope.laberintos = data;
-		console.log(data);
-	}).error(errorHandler);
+	}, function errorCallback(data) { 
+   	console.error(data);
+   });
 
 	$scope.iniciarLaberinto = function(idUsuario, idLaberinto) {
 		$http.get("iniciarLaberinto/"+ $scope.idUsuario +"/" + $scope.idLaberinto).success(function(data) {
@@ -52,5 +54,9 @@ $scope.idUsuario = "24";
 			$scope.esFinal = data.habFinal
 			// $scope.habitacionActual.acciones = data.habitacion.acciones;
 			/*como terminamos el juego?*/
-	}
+			
+			console.log(data);
+		}).error(errorHandler);
+		}
+	});
 		

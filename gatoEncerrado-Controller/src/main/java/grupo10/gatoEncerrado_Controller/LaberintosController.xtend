@@ -24,7 +24,7 @@ class LaberintosController {
     	
     	response.contentType = "application/json"
     	val juego = new Juego()// o creamos la instancia de juego o hacemos static al getNombre
-    	val usuario = juego.getUsuario() // tenemos un solo usuario 
+    	val usuario = juego.getUsuario().getNombre() // tenemos un solo usuario 
     	ok(usuario.toJson) // verificar si necesitamos nombre o todo el usuario
     }
     
