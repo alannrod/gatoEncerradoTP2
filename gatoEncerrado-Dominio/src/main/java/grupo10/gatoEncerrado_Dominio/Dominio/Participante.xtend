@@ -21,6 +21,10 @@ class Participante {
 		this.laberintos = newArrayList()
 	}
 	
+	def Laberinto getLaberintoPorId(Integer idLab){
+		return laberintos.findFirst[it.idLaberinto  == idLab]
+	}
+	
 	/*
 	def void elegirLaberinto(List<Laberinto> laberintos, Laberinto jugarEste){
 		

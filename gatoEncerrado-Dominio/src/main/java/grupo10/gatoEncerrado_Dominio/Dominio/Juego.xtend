@@ -44,18 +44,14 @@ class Juego {
 		 	throw new IllegalArgumentException("no se encontro participante")
 	}
 	
-	def static Laberinto getLaberinto(Integer idUsuario, Integer idLaberinto) {
-        instance.laberintos = getLaberintosParaParticipante(idUsuario)
-        instance.laberintoActual=instance.usuario.getLaberintos().get(1)
+	def Laberinto getLaberinto(Integer idUsuario, Integer idLaberinto) {
+        
+        instance.laberintoActual=instance.buscarId(idLaberinto)
         return instance.laberintoActual
 	}
 	
 	def Laberinto buscarId(Integer idLab){
-		for(var i = 0 ;i <this.laberintos.size() ; i++){
-            if(this.laberintos.get(i).getIdLaberinto()== idLab){
-            	return this.laberintos.get(i);
-			} 
-		}
+		return laberintos.findFirst[it.idLaberinto  == idLab]
 	}
 	
 	def static Juego realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
@@ -66,7 +62,7 @@ class Juego {
 		return instance
 	}
 	
-	def static buscarIdUser(Integer idUsuario) {
+	def buscarIdUser(Integer idUsuario) {
 		if (instance.usuario.getIdUsuario()== idUsuario)
 		return instance.usuario
 	}

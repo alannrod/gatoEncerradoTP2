@@ -59,14 +59,14 @@ class LaberintosController {
         val idParticipante = Integer.valueOf(idUser)
         val idLaberinto = Integer.valueOf(idLab)
         
-     
-        val laberinto = Juego.getLaberinto(idParticipante, idLaberinto)
-        //val participante = Juego.buscarIdUser(idParticipante)
+     	val juego = new Juego
+        val laberinto = juego.getLaberinto(idParticipante, idLaberinto)
+        val participante = juego.buscarIdUser(idParticipante)
         //obtengo un laberinto entero, lo achicaremos
-       // val minimo = new GatoMinimizado (laberinto)
+       val minimo = new GatoMinimizado (laberinto)
        
-       //val labMin = new IniciarLaberinto(laberinto, participante)
-       //val habsLabMin = labMin.getHabitaciones()
+       val labMin = new IniciarLaberinto(laberinto, participante)
+       val habsLabMin = labMin.getHabitaciones()
   
         try {
         	// devuelve las habitaciones del laberinto
@@ -92,7 +92,7 @@ class LaberintosController {
             val accionId = Integer.valueOf(idAccion)
             val participanteId = Integer.valueOf(idParticipante)
       
-        
+        	
             //val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
             val juegoAfter = Juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
             val labActual = juegoAfter.getLaberintoActual()

@@ -52,7 +52,7 @@ class GatoMinimizado {
 	def String realizarAccion(Juego juego, Integer idHab, Integer idAccion,  Integer idUsuario){
 		var habActual = juego.getLaberintoActual().buscarIdHab(idHab)
 		var accion = habActual.buscarIdAccion(idAccion)
-		var jugador = Juego.buscarIdUser(idUsuario)
+		var jugador = juego.buscarIdUser(idUsuario)
 		accion.realizarAccion(jugador, habActual)
 		return accion.getNombreAccion()//el string devuelto puede servirnos para devolver un alerta
 	}
