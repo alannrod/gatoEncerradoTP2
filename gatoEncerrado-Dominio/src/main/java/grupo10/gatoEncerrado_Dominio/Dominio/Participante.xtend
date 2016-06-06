@@ -1,4 +1,4 @@
-package grupo10.gatoEncerrado_Dominio
+package grupo10.gatoEncerrado_Dominio.Dominio
 
 import java.util.ArrayList
 import org.eclipse.xtend.lib.annotations.Accessors

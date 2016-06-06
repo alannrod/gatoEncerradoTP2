@@ -6,8 +6,8 @@ import org.uqbar.xtrest.api.annotation.Get
 //import org.uqbar.xtrest.api.annotation.Post
 import org.uqbar.xtrest.json.JSONUtils
 import org.omg.CORBA.UserException
-import grupo10.gatoEncerrado_Dominio.Juego
-import grupo10.gatoEncerrado_Dominio.GatoMinimizado
+import grupo10.gatoEncerrado_Dominio.DominioMinimo.GatoMinimizado
+import grupo10.gatoEncerrado_Dominio.Dominio.Juego
 
 /**
  * 
@@ -50,24 +50,27 @@ class LaberintosController {
     }
      
 
-    @Get('/iniciarLaberinto/:laberintoIde/:participanteIde')
-    def iniciarLaberinto() {
+    @Get('/iniciarLaberinto/:idUser:idLab')
+    def iniciarLaberintoNuevo() {
     	
         response.contentType = "application/json"
-        val idParticipante1 = Integer.valueOf(participanteIde)
-        val idLaberinto1 = Integer.valueOf(laberintoIde)
-        val laberinto = Juego.getLaberinto(idParticipante1, idLaberinto1)
+        
+        val idParticipante = Integer.valueOf(idUser)
+        val idLaberinto = Integer.valueOf(idLab)
+        
+        val juego = new Juego()// necesitamos una instancia de juego...
+        val laberinto = Juego.getLaberinto(idParticipante, idLaberinto)
         //obtengo un laberinto entero, lo achicaremos
         val minimo = new GatoMinimizado (laberinto)
-        val juego = new Juego()// necesitamos una instancia de juego...
-        val labMin = minimo.iniciarLaberinto(juego, idLaberinto1, idParticipante1)
+       
+        val labMin = minimo.iniciarLaberinto(juego, idLaberinto, idParticipante)
         try {
         	// Devuelve un laberinto o primer habitacion
             ok(labMin.toJson)
         }
         catch (UserException e) {
         	
-            notFound("No existe laberinto con el id " + idLaberinto1 + " para el participante con id " + idParticipante1);
+            notFound("No existe laberinto con el id " + idLaberinto + " para el participante con id " + idParticipante);
         }
     }
 

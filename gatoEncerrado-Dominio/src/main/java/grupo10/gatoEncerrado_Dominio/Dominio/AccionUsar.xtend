@@ -1,6 +1,6 @@
-package grupo10.gatoEncerrado_Dominio
+package grupo10.gatoEncerrado_Dominio.Dominio
 
-import grupo10.gatoEncerrado_Dominio.Accion
+import grupo10.gatoEncerrado_Dominio.Dominio.Accion
 
 class AccionUsar extends Accion {
 	String item

@@ -1,58 +1,10 @@
-package grupo10.gatoEncerrado_Dominio
+package grupo10.gatoEncerrado_Dominio.DominioMinimo
 
 import org.eclipse.xtend.lib.annotations.Accessors
 import java.util.ArrayList
-import grupo10.gatoEncerrado_Dominio.Laberinto
-import grupo10.gatoEncerrado_Dominio.Juego
-import grupo10.gatoEncerrado_Dominio.Participante
-import grupo10.gatoEncerrado_Dominio.Habitacion
-import grupo10.gatoEncerrado_Dominio.Accion
-
-@Accessors
-class LaberintoMin{
-	String idLaberinto
-	String nombreLaberinto
-	String path
-	
-	new(Integer identificador, String nombre, String path) {
-		this.idLaberinto = identificador.toString //conviene tenerlo en string para mostralo en la web
-		this.nombreLaberinto = nombre
-		this.path = path
-	}
-	
-}
-
-@Accessors
-class IniciarLaberinto{
-	//estos datos los necesitaremos en el metodo GET:/laberinto:idParticipante
-	String idLaberinto
-	ArrayList<HabitacionMin> habitaciones
-	ArrayList<String> inventario
-	
-	new(Laberinto laberinto, Participante participante) {
-		var GatoMinimizado chiquitolina = new GatoMinimizado(laberinto)//GatoMin sabe achicar las clases
-		this.idLaberinto = laberinto.getIdLaberinto().toString()//lo mostramos como texto
-		this.habitaciones= chiquitolina.minimizarHabitaciones()
-		this.inventario = participante.getInventario()
-	}
-	
-}
-
-@Accessors
-class HabitacionMin{
-	//estos datos nos serviran al iniciar juegp en un laberinto
-	String idHabitacion
-	ArrayList<String> acciones
-
-	
-	new(Integer identificador, ArrayList<Accion> actions) {
-		this.idHabitacion = identificador.toString()
-		for (Accion each: actions){
-			this.acciones.add(each.getNombreAccion())
-		}
-	}
-	
-}
+import grupo10.gatoEncerrado_Dominio.Dominio.Laberinto
+import grupo10.gatoEncerrado_Dominio.Dominio.Juego
+import grupo10.gatoEncerrado_Dominio.Dominio.Habitacion
 
 
 
