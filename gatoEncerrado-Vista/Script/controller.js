@@ -50,7 +50,9 @@ $scope.idUsuario = "24";
 		
 		$scope.realizarAccion = function(idHabitacion, idAccion, idParticipante) {
 		$http.get("realizarAccion/"+ $scope.idHabitacion +"/" + $scope.idAccion + "/" + $scope.idParticipante).success(function(data) {
-			/*$scope.laberintoActual ...*/
+			$scope.laberintoActual= data;
+			$scope.habitaciones = data.habitaciones;
+			$scope.accion = data.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
 			$scope.esFinal = data.habFinal
 			// $scope.habitacionActual.acciones = data.habitacion.acciones;
 			/*como terminamos el juego?*/

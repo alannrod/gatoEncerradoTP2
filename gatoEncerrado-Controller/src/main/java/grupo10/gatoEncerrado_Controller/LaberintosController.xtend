@@ -61,16 +61,16 @@ class LaberintosController {
         
      
         val laberinto = Juego.getLaberinto(idParticipante, idLaberinto)
-        val participante = Juego.buscarIdUser(idParticipante)
+        //val participante = Juego.buscarIdUser(idParticipante)
         //obtengo un laberinto entero, lo achicaremos
        // val minimo = new GatoMinimizado (laberinto)
        
-       val labMin = new IniciarLaberinto(laberinto, participante)
+       //val labMin = new IniciarLaberinto(laberinto, participante)
        //val habsLabMin = labMin.getHabitaciones()
   
         try {
         	// devuelve las habitaciones del laberinto
-            ok(labMin.toJson)
+            ok(laberinto.toJson)
         }
         catch (UserException e) {
         	

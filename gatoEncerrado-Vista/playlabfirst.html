@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <link rel="stylesheet" type="text/css" href="Style/Style.css">
 <script src="Lib/angular.min.js"></script>
+<script src="Lib/angular-resource.min.js"></script>
 
 <script src="Script/jquery-1.12.3.js"></script>
 <script src="Script/bootstrap.js"></script>
@@ -14,7 +15,7 @@
 <title>Gato Encerrado</title>
 <link rel="stylesheet" href="Style/bootstrap.css">
 </head>
-<body ng-controller= "LaberintosController">
+<body ng-controller= "gatoEncerradoControlador">
 
 
 <div class="container-fluid">
@@ -32,7 +33,7 @@
           <ul class="list-group" align="left">
                   <li class="laberinto1 list-group-item row swing" >
          <div ng-repeat="laberinto in laberintos"> 
-            <a ng-href="{{laberinto.url}}.html" class="btn btn-default btn-lg btn-block" role="button">
+            <a ng-href="{{laberinto.path}}.html" class="btn btn-default btn-lg btn-block" role="button">
               <img ng-src="WebContent/{{laberinto.path}}" class="img-responsive" alt="imagen laberinto"/>{{laberinto.nombreLaberinto}}</a>
               </div>
         </li>
@@ -45,17 +46,17 @@
       <div class="row">
         <div class="col-md-8">
           <div class="col-md-6">
-            {{iniciarLaberinto.habInicial}}
+            {{iniciarLaberinto.primeraHab}}
             <img src="WebContent/laberintos_1.jpg" class="img-responsive" alt="laberinto snapshot">
           </div>
-          <div class= "col-md-6">
-            acciones disponibles
-            <a href="#" class="btn btn-primary btn-lg btn-block" role="button">Agarrar moneda de 50 ctvos</a>
-            <a href="#" class="btn btn-primary btn-lg btn-block" role="button">Ir a Escalera</a>
-            <a href="#" class="btn btn-primary btn-lg btn-block" role="button">Usar Maquina de cafe</a>
-            <a href="#" class="btn btn-primary btn-lg btn-block" role="button">Meditar un rato</a>
+          <div id="contenedorInternoDerecho" class="col-md-2  panel panel-default">
+            <ul class="list-group" align="center">
+              <li>
+                <button type="button" class="btn btn-success btn-acciones row" ng-repeat="accion in primeraHab.acciones" ng-click="realizarAccion(primeraHab.id, accion.id, idUsuario)">{{accion.nombreAccion}} </button> 
+              </li>
+            </ul>
           </div>
-        </div>
+    </div>
        <div class= "col-md-4">
          inventario
          <select multiple class="form-control">
