@@ -34,11 +34,7 @@ class Habitacion {
     }
     
 	def Accion buscarIdAccion(Integer idAcc) {
-		for(var i = 0 ;i <this.acciones.size() ; i++){
-            if(this.acciones.get(i).getIdAccion()== idAcc){
-            	return this.acciones.get(i);
-            }
-        }
+		return acciones.findFirst[it.getIdAccion() == idAcc]
 	}
 	
 	def quitarItemDeLaHabitacion(String elItem) {

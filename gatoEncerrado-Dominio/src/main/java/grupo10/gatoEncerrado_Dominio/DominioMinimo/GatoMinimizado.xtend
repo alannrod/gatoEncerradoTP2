@@ -10,7 +10,7 @@ import grupo10.gatoEncerrado_Dominio.Dominio.Habitacion
 
 @Accessors
 class GatoMinimizado {
-	//Aqui "achicaremos" nuestras clases del dominio de acuerdo a los datos que necesitemos
+	
 	var ArrayList<Laberinto> laberintos
 	var Laberinto laberinto
 	
@@ -47,16 +47,12 @@ class GatoMinimizado {
 	
 	//las necesitaremos en nuestros get del controller para no traer todo
 	
-	def IniciarLaberinto iniciarLaberinto(Juego juego, Integer idLaberinto, Integer idUsuario){
-		var lab = juego.buscarId(idLaberinto)
-		var usuario = juego.buscarIdUser(idUsuario)
-		return new IniciarLaberinto(lab, usuario)
-	}
+
 	
 	def String realizarAccion(Juego juego, Integer idHab, Integer idAccion,  Integer idUsuario){
 		var habActual = juego.getLaberintoActual().buscarIdHab(idHab)
 		var accion = habActual.buscarIdAccion(idAccion)
-		var jugador = juego.buscarIdUser (idUsuario)
+		var jugador = Juego.buscarIdUser(idUsuario)
 		accion.realizarAccion(jugador, habActual)
 		return accion.getNombreAccion()//el string devuelto puede servirnos para devolver un alerta
 	}

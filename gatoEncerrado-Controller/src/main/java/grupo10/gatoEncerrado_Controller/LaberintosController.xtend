@@ -8,6 +8,7 @@ import org.uqbar.xtrest.json.JSONUtils
 import org.omg.CORBA.UserException
 import grupo10.gatoEncerrado_Dominio.DominioMinimo.GatoMinimizado
 import grupo10.gatoEncerrado_Dominio.Dominio.Juego
+import grupo10.gatoEncerrado_Dominio.DominioMinimo.IniciarLaberinto
 
 /**
  * 
@@ -58,12 +59,14 @@ class LaberintosController {
         val idParticipante = Integer.valueOf(idUser)
         val idLaberinto = Integer.valueOf(idLab)
         
-        val juego = new Juego()// necesitamos una instancia de juego...
+     
         val laberinto = Juego.getLaberinto(idParticipante, idLaberinto)
+        val participante = Juego.buscarIdUser(idParticipante)
         //obtengo un laberinto entero, lo achicaremos
-        val minimo = new GatoMinimizado (laberinto)
+       // val minimo = new GatoMinimizado (laberinto)
        
-        val labMin = minimo.iniciarLaberinto(juego, idLaberinto, idParticipante)
+       val labMin = new IniciarLaberinto(laberinto, participante)
+  
         try {
         	// Devuelve un laberinto o primer habitacion
             ok(labMin.toJson)
@@ -83,16 +86,18 @@ class LaberintosController {
     	 * accion que se llevo a cabo
     	 */
             response.contentType = "application/json"
+            
             val habitacionId = Integer.valueOf(idHabitacion)
             val accionId = Integer.valueOf(idAccion)
             val participanteId = Integer.valueOf(idParticipante)
-            val juego = new Juego()// necesitaremos una instancia de juego
-            val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
-            val juegoAfter = juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
+      
+        
+            //val minificador = new GatoMinimizado()// necesitamos crear un GatoMin o hacer estatico el metodo realizar accion
+            val juegoAfter = Juego.realizarAccion(habitacionId,accionId, participanteId)// hace internamente la accion,  no retorna nada
         try {
-            val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
+            //val resultadoRealizarAccion = minificador.realizarAccion(juegoAfter, habitacionId,accionId, participanteId)
             // Devolver lo que resulta como json
-            ok(resultadoRealizarAccion .toJson);
+            ok(juegoAfter.toJson);
         }
         catch (UserException e) {
             return notFound("No se puede realizar accion '" + idAccion + "'");

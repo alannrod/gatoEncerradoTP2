@@ -47,7 +47,7 @@ class Laberinto {
 	}
 	
 	
-	def buscarIdHab(Integer idHab) {
+	def Habitacion buscarIdHab(Integer idHab) {
 		return habitaciones.findFirst[it.idHabitacion == idHab]
      }
 

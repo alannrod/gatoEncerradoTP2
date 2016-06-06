@@ -20,5 +20,12 @@ class IniciarLaberinto{
 		this.inventario = participante.getInventario()
 	}
 	
+	
+	def devolverHabInicial(){
+		//falta 
+	}
+	
+	
+	
 }
 	

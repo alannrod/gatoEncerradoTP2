@@ -58,16 +58,23 @@ class Juego {
 		}
 	}
 	
-	def realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
-		val queHace = instance.laberintoActual.buscarIdHab(idHabitacion).buscarIdAccion(idAccion)
-		queHace.realizarAccion(instance.usuario,instance.laberintoActual.buscarIdHab(idHabitacion))
+	def static Juego realizarAccion(Integer idHabitacion, Integer idAccion, Integer idUsuario) {
+		val hab = instance.laberintoActual.buscarIdHab(idHabitacion)
+		val accion = hab.buscarIdAccion(idAccion)
+		
+		accion.realizarAccion(instance.usuario,hab)
 		return instance
 	}
 	
-	def buscarIdUser(Integer idUsuario) {
-		if (this.usuario.getIdUsuario()== idUsuario)
-		return this.usuario
+	def static buscarIdUser(Integer idUsuario) {
+		if (instance.usuario.getIdUsuario()== idUsuario)
+		return instance.usuario
 	}
+	
+	def static getUsuarioStatic() {
+		return instance.getUsuario()
+	}
+	
 	
 	
 }
