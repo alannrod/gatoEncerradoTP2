@@ -32,9 +32,13 @@ class GatoMinimizado {
 		return resultado		
 	}
 	
-	def ArrayList<HabitacionMin> minimizarHabitaciones() {
+	def ArrayList<Habitacion> getHabitaciones(){
+		this.laberinto.getHabitaciones()
+	}
+	
+	def static ArrayList<HabitacionMin> minimizarHabitaciones(Laberinto lab) {
 		var ArrayList <HabitacionMin> resultado = newArrayList()
-		var habitaciones = this.laberinto.getHabitaciones()
+		var habitaciones = lab.getHabitaciones()
 		for (Habitacion each: habitaciones){
 			resultado.add (new HabitacionMin (each.getIdHabitacion(),each.getAcciones()))
 			}
